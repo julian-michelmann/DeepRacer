@@ -29,14 +29,15 @@ def reward_function(params):
         reward = reward_slowness(speed, 1e-2)
     elif distance_from_center <= marker_1:
         reward = reward_speed(speed, 1.0)
+        reward = reward_driving_straight(reward, steering_angle)
     elif distance_from_center <= marker_2:
         reward = reward_speed(speed, 0.5)
+        reward = reward_driving_straight(reward, steering_angle)
     elif distance_from_center <= marker_3:
         reward = reward_slowness(speed, 0.1)
+        reward = reward_driving_straight(reward, steering_angle)
     else:
         reward = reward_slowness(speed, 1e-3)  # likely crashed/ close to off track
-
-    reward = reward_driving_straight(speed, reward)
 
     return float(reward)
 
@@ -72,7 +73,7 @@ def reward_slowness(speed, reward):
 
 def reward_driving_straight(reward, steering_angle):
     if steering_angle != 0:
-        reward *= 0.8
+        reward *= 0.7
 
     return reward
 
