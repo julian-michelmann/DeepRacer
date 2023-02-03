@@ -1,5 +1,5 @@
 parameter = {
-    "all_wheels_on_track": True,
+    "all_wheels_on_track": False,
     "x": 0.0,
     "y": 0.0,
     "closest_objects": [0, 0],
@@ -16,7 +16,7 @@ parameter = {
     "objects_location": [],
     "objects_speed": [],
     "progress": 0.0,
-    "speed": 2.0,
+    "speed": 0.3,
     "steering_angle": 0.0,
     "steps": 1,
     "track_length": 100.0,

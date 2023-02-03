@@ -36,33 +36,36 @@ def reward_function(params):
     else:
         reward = reward_slowness(speed, 1e-3)  # likely crashed/ close to off track
 
-    reward_driving_straight(speed, reward)
+    reward = reward_driving_straight(speed, reward)
 
     return float(reward)
 
 
 def reward_speed(speed, reward):
-    if 1 < speed <= 2:
-        reward = reward * 1
-    elif 0.5 < speed <= 1:
+    if speed >= 3:
         reward = reward * 0.5
-    elif 0 <= speed <= 0.5:
-        reward = 0
+    elif speed >= 2:
+        reward = reward * 1
+    elif speed >= 1:
+        reward = reward * 0.5
+    elif speed < 1 and speed != 0:
+        reward = reward * 0.25
+    elif speed == 0:
+        reward = reward * 0.125
     return reward
 
 
 def reward_slowness(speed, reward):
-    if 1 < speed <= 2:
-        reward = reward * 0
-    elif 0.5 < speed <= 1:
-        reward = reward * 1.2
-    elif 0 < speed <= 0.5:
-        reward = reward * 1.5
-    else:
-        reward = 0
-
-    if reward > 1:
-        reward = 1
+    if speed >= 3:
+        reward = reward * 0.125
+    elif speed >= 2:
+        reward = reward * 0.25
+    elif speed >= 1:
+        reward = reward * 0.5
+    elif speed < 1 and speed != 0:
+        reward = reward * 1.0
+    elif speed == 0:
+        reward = reward * 0.125
 
     return reward
 
@@ -72,6 +75,10 @@ def reward_driving_straight(reward, steering_angle):
         reward *= 0.8
 
     return reward
+
+# Reward not to fast changing speed
+# Make speed rewards more fluid
+# Have a look in the log analytic tools
 
 # Doing perfect 1
 # Doing not perfect but well 0,5
