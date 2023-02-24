@@ -5,6 +5,7 @@ from DeepRacer.reward import reward_speed, reward_driving_straight
 
 from parameterized import parameterized
 
+
 parameter = {
     "all_wheels_on_track": True,
     "x": 0.0,
