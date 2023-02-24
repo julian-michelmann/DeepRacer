@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from DeepRacer.reward import reward_speed
+from DeepRacer.reward import reward_pace
 
 
 def plot_speed_reward():
@@ -13,11 +13,11 @@ def plot_speed_reward():
         x_points.append(i)
 
     for x_point in x_points:
-        reward = reward_speed(1, x_point)
+        reward = reward_pace(1, x_point)
         y_points_reward_speed.append(reward)
 
     for x_point in x_points:
-        reward = reward_speed(0.49, x_point)
+        reward = reward_pace(0.49, x_point)
         y_points_reward_slowness.append(reward)
 
     plt.plot(np.array(x_points), np.array(y_points_reward_speed))

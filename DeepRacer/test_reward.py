@@ -1,7 +1,7 @@
 import unittest
 from nose.tools import assert_equal
 
-from DeepRacer.reward import reward_speed, reward_driving_straight
+from DeepRacer.reward import reward_pace, reward_driving_straight
 
 from parameterized import parameterized
 
@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
         (0.5, 0, 0.0625)  # Too slow
     ])
     def test_reward_speed(self, reward, speed, expected_reward):
-        result = reward_speed(reward, speed)
+        result = reward_pace(reward, speed)
         if result != expected_reward:
             print("")
             print(

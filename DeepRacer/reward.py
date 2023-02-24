@@ -21,7 +21,7 @@ def reward_function(params):
 
     reward = reward_distance_from_center(track_width, all_wheels_on_track, is_reversed, distance_from_center)
 
-    reward = reward_speed(reward, speed)
+    reward = reward_pace(reward, speed)
 
     reward = reward_driving_straight(reward, steering_angle, is_left_of_center)
 
@@ -50,15 +50,15 @@ def reward_distance_from_center(track_width, all_wheels_on_track, is_reversed, d
     return reward
 
 
-def reward_speed(reward, speed):
+def reward_pace(reward, speed):
     if reward >= 0.5:
-        reward = reward_pace(reward, speed)
+        reward = reward_speed(reward, speed)
     else:
         reward = reward_slowness(reward, speed)
     return reward
 
 
-def reward_pace(reward, speed):
+def reward_speed(reward, speed):
     if speed >= 3:
         reward = reward * 0.5
     elif speed >= 2:
@@ -97,13 +97,3 @@ def reward_driving_straight(reward, steering_angle, is_left_of_center):
         if not is_left_of_center and steering_angle < 0:
             reward *= 0.7
     return reward
-
-
-# Reward not to fast changing speed
-# Make speed rewards more fluid
-# Have a look in the log analytic tools
-
-# Doing perfect 1
-# Doing not perfect but well 0,5
-# Doing wrong but tries to fix it 0,5
-# Simply doing wrong 0,01
