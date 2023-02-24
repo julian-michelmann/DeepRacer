@@ -6,19 +6,22 @@ from DeepRacer.reward import reward_speed
 
 def plot_speed_reward():
     x_points = []
-    y_points = []
+    y_points_reward_speed = []
+    y_points_reward_slowness = []
 
     for i in np.arange(0, 4, 0.1):
         x_points.append(i)
-        print(i)
-
-    print(x_points)
 
     for x_point in x_points:
         reward = reward_speed(1, x_point)
-        y_points.append(reward)
+        y_points_reward_speed.append(reward)
 
-    plt.plot(np.array(x_points), np.array(y_points))
+    for x_point in x_points:
+        reward = reward_speed(0.49, x_point)
+        y_points_reward_slowness.append(reward)
+
+    plt.plot(np.array(x_points), np.array(y_points_reward_speed))
+    plt.plot(np.array(x_points), np.array(y_points_reward_slowness))
     plt.title("Reward Speed Function")
     plt.xlabel("Speed")
     plt.ylabel("Reward")
